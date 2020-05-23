@@ -1,0 +1,14 @@
+{
+  "name": "ether",
+  "version": "0.0.1",
+  "description": "usage of ether.js library",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Jakub Janowski",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^4.0.47"
+  }
+}
