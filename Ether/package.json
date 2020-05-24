@@ -4,11 +4,13 @@
   "description": "usage of ether.js library",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "simple": "node test.js"
   },
   "author": "Jakub Janowski",
   "license": "ISC",
   "dependencies": {
-    "ethers": "^4.0.47"
+    "ethers": "^4.0.47",
+    "fs": "^0.0.1-security",
+    "solc": "^0.6.8"
   }
 }
