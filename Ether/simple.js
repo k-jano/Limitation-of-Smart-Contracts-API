@@ -1,7 +1,8 @@
 const ethers = require('ethers');
 const compiler = require('solc');
+const { performance } = require('perf_hooks');
 
-let privateKey = "0x0123456789012345678901234567890123456789012345678901234567890123";
+let privateKey = "0x0123456789012345678901234567890123456789012345678901234567890125";
 let provider = ethers.getDefaultProvider('ropsten');
 let walletWithProvider = new ethers.Wallet(privateKey, provider)
 
@@ -32,18 +33,25 @@ let address = ''
 
 const deploy = async function() {
     let factory = new ethers.ContractFactory(abi, bytecode, walletWithProvider);
+
+    const start = performance.now();
     let contract = await factory.deploy();
     //console.log(contract.address);
     //console.log(contract.deployTransaction.hash);
 
     await contract.deployed();
+    const end = performance.now();
+    console.log("Deployment time " + (end - start) + " ms");
     address = contract.address;
 };
 
 const getValue = async function(){
     let contract = new ethers.Contract(address, abi, provider);
+    const start = performance.now();
     const currValue = await contract.getGreeting();
-    console.log(currValue);
+    const end = performance.now();
+    console.log("getGreeting time " + (end - start) + " ms");
+    //console.log(currValue);
 }
 
 const setValue = async function(){
@@ -51,15 +59,18 @@ const setValue = async function(){
     let contractWithSigner = contract.connect(walletWithProvider);
 
     const newVal = 'New Value!';
+    const start = performance.now();
     const tx = await contractWithSigner.setGreeting(newVal);
     await tx.wait();
+    const end = performance.now();
+    console.log("setGreeting time " + (end - start) + " ms");
 }
 
 const main = async function(){
     await deploy();
     await getValue();
     await setValue();
-    getValue();
+    //getValue();
 }
 
 main();

@@ -4,7 +4,7 @@
   "description": "usage of ether.js library",
   "main": "index.js",
   "scripts": {
-    "simple": "node test.js",
+    "simple": "node simple.js",
     "complex": "node complex.js"
   },
   "author": "Jakub Janowski",
